@@ -1,16 +1,83 @@
 import chalk from "chalk";
 import prompts from "prompts";
+import figlet from "figlet";
+import { listAllMovies } from "./listAllMovies.js";
+
+//import DB from erik-sytnyk's git repo : movies-list (on https://github.com/erik-sytnyk/movies-list/blob/master/db.json)
+
+figlet("The MoviesDB", function (err, data) {
+  if (err) {
+    console.log("Something went wrong...");
+    console.dir(err);
+    return;
+  }
+  console.log(chalk.blueBright(data));
+});
 
 async function app() {
-  console.log(chalk.bgBlue("Bienvenue !"));
-
   const promptResult = await prompts({
     type: "text",
     name: "firstName",
-    message: "Quel est ton nom?",
+    message: "What's your name?",
   });
+  // let confirmEnding = true;
+  //   while (confirmEnding === false){
 
-  console.log(chalk.redBright.bold(`Bienvenue ${promptResult.firstName} !`));
+  console.log(chalk.blueBright.bold(`Welcome ${promptResult.firstName} !`));
+
+  let continueQuestion = await prompts({
+    type: "confirm",
+    name: "choice",
+    message: "Do you want to continue ?",
+    initial: true,
+  });
+  while (continueQuestion.choice === true) {
+    let selectTopic = await prompts({
+      type: "select",
+      name: "value",
+      message: "Choose a command",
+      choices: [
+        {
+          title: "List all movies",
+          value: "listAllMovies",
+        },
+
+        {
+          title: "Filter all movies",
+          value: "#fct listAllSpecificMovies.js",
+        },
+
+        {
+          title: "Access to another feature",
+          value: "batmanRocks",
+        },
+      ],
+      initial: 0,
+    });
+    console.log(
+      chalk.yellow.bold(`\n Are you sure you want to ${selectTopic.value}? `)
+    );
+    let sure = await prompts({
+      type: "toggle",
+      name: "value",
+      message: "Can you confirm?",
+      initial: true,
+      active: "yes",
+      inactive: "no",
+    });
+    if (sure.value === true) {
+      console.log("Let's go to the selected fct");
+      selectTopic.value;
+    } else {
+      console.log(chalk.yellow.bold(continueQuestion.choice));
+      continueQuestion = await prompts({
+        type: "confirm",
+        name: "choice",
+        message: "Do you want to continue ?",
+        initial: true,
+      });
+    }
+  }
 }
 
-app();
+setTimeout(app, 300);
