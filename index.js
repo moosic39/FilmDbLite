@@ -2,6 +2,7 @@ import chalk from "chalk";
 import prompts from "prompts";
 import figlet from "figlet";
 import { listAllMovies } from "./listAllMovies.js";
+import { filterBy } from "./filterAllMovies.js";
 
 //import DB from erik-sytnyk's git repo : movies-list (on https://github.com/erik-sytnyk/movies-list/blob/master/db.json)
 
@@ -39,24 +40,25 @@ async function app() {
       choices: [
         {
           title: "List all movies",
-          value: "listAllMovies",
+          value: listAllMovies,
         },
 
         {
           title: "Filter all movies",
-          value: "#fct listAllSpecificMovies.js",
+          value: filterBy,
         },
 
         {
           title: "Access to another feature",
           value: "batmanRocks",
         },
+        {
+          title: "Exit",
+          value: process.exit,
+        },
       ],
       initial: 0,
     });
-    console.log(
-      chalk.yellow.bold(`\n Are you sure you want to ${selectTopic.value}? `)
-    );
     let sure = await prompts({
       type: "toggle",
       name: "value",
@@ -67,7 +69,7 @@ async function app() {
     });
     if (sure.value === true) {
       console.log("Let's go to the selected fct");
-      selectTopic.value;
+      await selectTopic.value();
     } else {
       console.log(chalk.yellow.bold(continueQuestion.choice));
       continueQuestion = await prompts({

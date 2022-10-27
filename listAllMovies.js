@@ -4,7 +4,7 @@ import chalk from "chalk";
 
 const filePath = "./moviesList.json";
 
-export async function listAllMovies() {
+export async function listAllMovies () {
   const MOVIES = await jsonfile.readFile(filePath);
 
   let movies = MOVIES.movies;
@@ -16,7 +16,7 @@ export async function listAllMovies() {
   let sliceId = 0;
 
   console.log(
-    chalk.blueBright.bold(`La liste contient ${movies.length} films`)
+    chalk.blueBright.bold(`There is ${movies.length} movies in the list`)
   );
 
   while (sliceId <= movies.length) {
@@ -45,9 +45,4 @@ export async function listAllMovies() {
   }
 }
 
-setTimeout(listAllMovies, 300);
-//let listOfTitles =  allTitles.forEach( function(t) { listOfTitles.push(t) })
-//console.log(listOfTitles)
-
-//let filteredComedyMovies = MOVIES.filter((genre)=>genre==="Comedy")
-//console.log(filteredComedyMovies)
+listAllMovies();
