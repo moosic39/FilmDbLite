@@ -4,7 +4,7 @@ import chalk from "chalk";
 
 const filePath = "./moviesList.json";
 
-export async function listAllMovies () {
+export async function listAllMovies() {
   const MOVIES = await jsonfile.readFile(filePath);
 
   let movies = MOVIES.movies;
@@ -44,5 +44,3 @@ export async function listAllMovies () {
     }
   }
 }
-
-listAllMovies();

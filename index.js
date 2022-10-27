@@ -15,14 +15,12 @@ figlet("The MoviesDB", function (err, data) {
   console.log(chalk.blueBright(data));
 });
 
-async function app() {
+async function app () {
   const promptResult = await prompts({
     type: "text",
     name: "firstName",
     message: "What's your name?",
   });
-  // let confirmEnding = true;
-  //   while (confirmEnding === false){
 
   console.log(chalk.blueBright.bold(`Welcome ${promptResult.firstName} !`));
 
@@ -49,8 +47,8 @@ async function app() {
         },
 
         {
-          title: "Access to another feature",
-          value: "batmanRocks",
+          title: "Access to another not implemented feature",
+          value: process.exit,
         },
         {
           title: "Exit",
@@ -68,7 +66,7 @@ async function app() {
       inactive: "no",
     });
     if (sure.value === true) {
-      console.log("Let's go to the selected fct");
+      console.log("Let's go to the selected feature");
       await selectTopic.value();
     } else {
       console.log(chalk.yellow.bold(continueQuestion.choice));
