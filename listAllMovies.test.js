@@ -19,7 +19,7 @@ it("should render the first film title of the second panel after a prompt", asyn
   //A panel contain 20 movies
   let firstFilmInPanel = allTitles[20];
 
-  listAllMovies();
+  await listAllMovies();
 
   expect(allTitles[20]).toEqual(firstFilmInPanel);
 });

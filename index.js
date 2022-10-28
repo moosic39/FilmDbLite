@@ -2,9 +2,10 @@ import chalk from "chalk";
 import prompts from "prompts";
 import figlet from "figlet";
 import { listAllMovies } from "./listAllMovies.js";
-import { filterBy } from "./filterAllMovies.js";
+import { filterBy } from "./FilterBy Functions/filterAllMovies.js";
+import { printName } from "./printName.js";
 
-//import DB from erik-sytnyk's git repo : movies-list (on https://github.com/erik-sytnyk/movies-list/blob/master/db.json)
+//import DB.json from erik-sytnyk's git repo : movies-list (on https://github.com/erik-sytnyk/movies-list/blob/master/db.json)
 
 figlet("The MoviesDB", function (err, data) {
   if (err) {
@@ -15,21 +16,10 @@ figlet("The MoviesDB", function (err, data) {
   console.log(chalk.blueBright(data));
 });
 
-async function app () {
-  const promptResult = await prompts({
-    type: "text",
-    name: "firstName",
-    message: "What's your name?",
-  });
+async function app() {
+  console.log(chalk.blueBright.bold(await printName()));
 
-  console.log(chalk.blueBright.bold(`Welcome ${promptResult.firstName} !`));
-
-  let continueQuestion = await prompts({
-    type: "confirm",
-    name: "choice",
-    message: "Do you want to continue ?",
-    initial: true,
-  });
+  let continueQuestion = { choice: true };
   while (continueQuestion.choice === true) {
     let selectTopic = await prompts({
       type: "select",
@@ -40,15 +30,9 @@ async function app () {
           title: "List all movies",
           value: listAllMovies,
         },
-
         {
           title: "Filter all movies",
           value: filterBy,
-        },
-
-        {
-          title: "Access to another not implemented feature",
-          value: process.exit,
         },
         {
           title: "Exit",
@@ -80,4 +64,4 @@ async function app () {
   }
 }
 
-setTimeout(app, 300);
+setTimeout(app, 1000);
