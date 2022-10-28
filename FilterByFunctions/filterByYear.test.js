@@ -24,8 +24,15 @@ it("should render all film in 1988", async () => {
   ]);
 });
 
-it("should return an error", async () => {
+it("should render all film in 1990 but no result", async () => {
   prompts.mockReturnValue({ value: "1990" });
+  expect(await filterByYear()).toBe(
+    chalk.redBright.bold("There is no result for your research.")
+  );
+});
+
+it("should return an error when string input", async () => {
+  prompts.mockReturnValue({ value: "qsdf" });
   expect(await filterByYear()).toBe(
     chalk.redBright.bold("There is no result for your research.")
   );

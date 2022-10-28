@@ -2,10 +2,10 @@ import chalk from "chalk";
 import prompts from "prompts";
 import figlet from "figlet";
 import { listAllMovies } from "./listAllMovies.js";
-import { filterBy } from "./FilterBy Functions/filterAllMovies.js";
+import { filterBy } from "./FilterByFunctions/filterAllMovies.js";
 import { printName } from "./printName.js";
 
-//import DB.json from erik-sytnyk's git repo : movies-list (on https://github.com/erik-sytnyk/movies-list/blob/master/db.json)
+// moviesList.json from erik-sytnyk's git repo : movies-list (on https://github.com/erik-sytnyk/movies-list/blob/master/db.json)
 
 figlet("The MoviesDB", function (err, data) {
   if (err) {
@@ -53,7 +53,6 @@ async function app() {
       console.log("Let's go to the selected feature");
       await selectTopic.value();
     } else {
-      console.log(chalk.yellow.bold(continueQuestion.choice));
       continueQuestion = await prompts({
         type: "confirm",
         name: "choice",
@@ -64,4 +63,4 @@ async function app() {
   }
 }
 
-setTimeout(app, 1000);
+setTimeout(app, 500);

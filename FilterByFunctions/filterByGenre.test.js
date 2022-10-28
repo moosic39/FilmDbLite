@@ -29,6 +29,7 @@ it("should return The Wolf of Wall Street", async () => {
   expect(title).toBe("The Wolf of Wall Street");
 });
 
+// Error
 it("should return an error", async () => {
   prompts.mockReturnValueOnce({ value: ["Music", "Animation"] });
   expect(await filterByGenre()).toBe(
